@@ -1,0 +1,30 @@
+@startuml
+|Admin|
+start
+:Accesează fila "Gestionare evenimente";
+:Se afișează lista de evenimente;
+:Selectează eveniment sau apasă "Creează eveniment nou";
+:Apasă "Editează" / "Creează";
+|Sistem|
+:Deschide formular de editare;
+|Admin|
+:Modifică doar: nume, dată, locație, preț, URL imagine principală, descriere;
+if (Apasă "Salvează"?) then (da)
+  |Sistem|
+  :Validează câmpurile;
+  if (Validare OK?) then (da)
+    :Salvează modificările în baza de date;
+    :Înregistrează audit log;
+    :Actualizează afișarea publică;
+    |Admin|
+    :Afișează mesaj "Modificări salvate";
+  else (nu)
+    |Admin|
+    :Afișează erori validare;
+  endif
+else (Anulează)
+  |Admin|
+  :Revine la lista de evenimente (fără salvare);
+endif
+stop
+@enduml
