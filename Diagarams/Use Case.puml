@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+actor "Utilizator" as user
+actor "Admin" as admin
+rectangle {
+  usecase "Creaza Evenimente" as UCcreate
+  usecase "Modifica Evenimente" as UCModify
+  usecase "Cumpara Bilete" as UC1
+  usecase "Vizualizeaza Evenimente" as UC2
+  usecase "Creaza cont" as UCAccount
+}
+UC2 --- UCcreate
+UC2 --- UCModify
+UCcreate <-- admin
+UCModify <-- admin
+user --> UC1
+user --> UC2
+user --> UCAccount
+UCAccount <-- admin
+@enduml
